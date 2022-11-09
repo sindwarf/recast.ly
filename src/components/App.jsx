@@ -1,38 +1,31 @@
 import VideoList from './VideoList.js';
 import Search from './Search.js';
-import VideoListEntry from './VideoListEntry.js';
 import VideoPlayer from './VideoPlayer.js';
 import exampleVideoData from '/src/data/exampleVideoData.js';
 // /src/data/exampleVideoData.js
+
+const {useState} = React;//AKA const useState = React.useState;
+
 var App = () => {
-  //exampleVideoData is an array of objects
-  //pass to VideoList as a prop
-  //console.log(exampleVideoData);
-  const videoData = exampleVideoData;//array of objects
+  const [videos, setVideos] = React.useState(exampleVideoData);
+  const [currentVideo, setNewVideo] = useState(exampleVideoData[0]);
 
   return (
     <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div Search ><h5><em>Search</em> view goes here</h5></div>
+          <Search/>
         </div>
       </nav>
       <div className="row">
         <div className="col-md-7">
-          <div><h5><em>videoPlayer</em> view goes here</h5></div>
+          <VideoPlayer video={currentVideo} />
         </div>
         <div className="col-md-5">
-          <div VideoList VideoList={VideoList}><h5><em>videoList</em> view goes here</h5></div>
+          <VideoList videos={videos} setNewVideo={(v) => setNewVideo(v)}/>
         </div>
       </div>
     </div>
-  );
-};
-
-var ExportVideoData = () => {
-  return (
-    <VideoData videoData= {[...rest]}
-    />
   );
 };
 
